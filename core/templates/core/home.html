@@ -1,0 +1,379 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="container-fluid px-0">
+        <div class="row g-0">
+            <div class="col-12">
+                <div class="hero-image-container">
+                    <img src="{{ hero.image.url }}" alt="TechNova Hero" class="hero-img">
+                </div>
+            </div>
+        </div>
+    </div>
+
+<!-- STATS -->
+<div class="container py-5">
+    <div class="row text-center g-4">
+        {% for stat in stats %}
+        <div class="col-6 col-md-3">
+            <div class="stat-box">
+                <div class="stat-icon">
+                    <img src="{{ stat.icon.url }}">
+                </div>
+                <h2>{{ stat.number }}</h2>
+                <p>{{ stat.label }}</p>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<section id="service" class="services-section">
+    <div class="container">
+
+        {% if service_section %}
+        <div class="mb-5 text-center">
+            <h2 class="service-section-title">
+                {{ service_section.title }}
+            </h2>
+            <p class="service-section-subtitle">
+                {{ service_section.subtitle }}
+            </p>
+        </div>
+        {% endif %}
+
+        <div class="row g-4 justify-content-center">
+            {% for service in services %}
+            <div class="col-md-6 col-lg-3">
+                <div class="service-card">
+                    <div class="service-top {{ service.gradient }}">
+                        <img src="{{ service.icon.url }}" class="service-icon">
+                    </div>
+                    <div class="service-body">
+                        <h5>{{ service.card_title }}</h5>
+                        <p>{{ service.card_description }}</p>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+    </div>
+</section>
+
+
+<!-- FEATURES -->
+<section class="why-choose-section py-5">
+    <div class="container">
+
+        {% if feature_section %}
+        <div class="text-center mb-5">
+            <h2 class="section-title">
+                {{ feature_section.title }}
+            </h2>
+            <p class="section-subtitle">
+                {{ feature_section.subtitle }}
+            </p>
+        </div>
+        {% endif %}
+
+        <div class="row g-4 justify-content-center">
+            {% for feature in features %}
+            <div class="col-md-4">
+                <div class="feature-card">
+                    <div class="feature-icon {{ feature.bg_class }}">
+                        <img src="{{ feature.icon.url }}">
+                    </div>
+                    <h5>{{ feature.title }}</h5>
+                    <p>{{ feature.description }}</p>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+    </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about" class="py-5">
+    <div class="container">
+
+        {% if about %}
+        <div class="row align-items-center g-4 g-lg-5">
+
+            <!-- Text -->
+            <div class="col-12 col-lg-6">
+                <h2 class="about-title">
+                    {{ about.title }}
+                </h2>
+
+                <p class="about-text">
+                    {{ about.paragraph_1 }}
+                </p>
+
+                <p class="about-text">
+                    {{ about.paragraph_2 }}
+                </p>
+            </div>
+
+            <!-- Image -->
+            <div class="col-12 col-lg-6">
+                <div class="about-image-wrapper">
+                    <img src="{{ about.image.url }}"
+                         alt="{{ about.title }}"
+                         class="about-image img-fluid">
+                </div>
+            </div>
+
+        </div>
+        {% endif %}
+
+    </div>
+</section>
+
+
+<!-- TESTIMONIALS -->
+<section id="testimonials" class="testimonials-section">
+    <div class="container">
+
+        {% if testimonial_section %}
+        <div class="text-center mb-5">
+            <h2 class="testimonials-section-title">
+                {{ testimonial_section.title }}
+            </h2>
+            <p class="testimonials-section-subtitle">
+                {{ testimonial_section.subtitle }}
+            </p>
+        </div>
+        {% endif %}
+
+        <div class="row g-4 g-lg-5">
+            {% for t in testimonials %}
+            <div class="col-md-4">
+                <div class="testimonial-card">
+                    <div class="bi bi-quote quote-icon"></div>
+            <div class="stars">
+                {% for i in "12345" %}
+                    {% if forloop.counter <= t.rating %}
+                        <i class="bi bi-star-fill"></i>
+                    {% else %}
+                        <i class="bi bi-star"></i>
+                    {% endif %}
+                {% endfor %}
+            </div>
+                    <p class="testimonial-text">{{ t.message }}</p>
+                    <h6>{{ t.name }}</h6>
+                    <span>{{ t.role }}</span>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+    </div>
+</section>
+
+<section class="faq-section py-5">
+    <div class="container">
+
+        <!-- Heading -->
+        <div class="text-center mb-5">
+            <h2 class="faq-title">{{ faq_section.title }}</h2>
+            <p class="faq-subtitle">{{ faq_section.subtitle }}</p>
+        </div>
+
+        <!-- Accordion -->
+        <div class="accordion faq-accordion" id="faqAccordion">
+
+            {% for faq in faqs %}
+            <div class="accordion-item">
+
+                <h2 class="accordion-header">
+                    <button class="accordion-button collapsed"
+                            data-bs-toggle="collapse"
+                            data-bs-target="#faq{{ forloop.counter }}">
+                        {{ faq.question }}
+                    </button>
+                </h2>
+
+                <div id="faq{{ forloop.counter }}"
+                     class="accordion-collapse collapse"
+                     data-bs-parent="#faqAccordion">
+
+                    <div class="accordion-body">
+                        {{ faq.answer }}
+                    </div>
+
+                </div>
+            </div>
+            {% endfor %}
+
+        </div>
+    </div>
+</section>
+<section id="contact" class="contact-section py-5">
+    <div class="container">
+
+        <!-- Heading -->
+        <div class="text-center mb-5">
+            <h2 class="contact-title">{{ contact.title }}</h2>
+            <p class="contact-subtitle">
+                {{ contact.subtitle|linebreaksbr }}
+            </p>
+        </div>
+
+        <div class="row g-5 align-items-start">
+
+            <!-- Left Info -->
+            <div class="col-12 col-lg-5">
+                <div class="contact-info">
+
+                    <!-- Phone -->
+                    <div class="info-item">
+                        <div class="icon-box">
+                            <i class="bi bi-telephone"></i>
+                        </div>
+                        <div>
+                            <h6>Phone</h6>
+                            <p>{{ contact.phone }}</p>
+                            <span>{{ contact.phone_note }}</span>
+                        </div>
+                    </div>
+
+                    <!-- Email -->
+                    <div class="info-item">
+                        <div class="icon-box">
+                            <i class="bi bi-envelope"></i>
+                        </div>
+                        <div>
+                            <h6>Email</h6>
+                            <p>{{ contact.email }}</p>
+                            <span>{{ contact.email_note }}</span>
+                        </div>
+                    </div>
+
+                    <!-- Address -->
+                    <div class="info-item">
+                        <div class="icon-box">
+                            <i class="bi bi-geo-alt"></i>
+                        </div>
+                        <div>
+                            <h6>Address</h6>
+                            <p>{{ contact.address_line1 }}</p>
+                            <span>{{ contact.address_line2 }}</span>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Right Form -->
+            <div class="col-12 col-lg-7">
+                <div class="contact-form-card">
+
+                    <form method="POST" action="">
+                        {% csrf_token %}
+
+                        <div class="mb-4">
+                            <label class="form-label">Name</label>
+                            <input type="text"
+                                   name="name"
+                                   class="form-control"
+                                   placeholder="Your full name"
+                                   required>
+                        </div>
+
+                        <div class="mb-4">
+                            <label class="form-label">Email</label>
+                            <input type="email"
+                                   name="email"
+                                   class="form-control"
+                                   placeholder="your.email@example.com"
+                                   required>
+                        </div>
+
+                        <div class="mb-4">
+                            <label class="form-label">Message</label>
+                            <textarea name="message"
+                                      class="form-control"
+                                      rows="5"
+                                      placeholder="Tell us about your project..."
+                                      required></textarea>
+                        </div>
+
+                        <button type="submit" class="btn send-btn w-100">
+                            Send Message
+                        </button>
+                    </form>
+
+                    {% if success %}
+                    <p class="text-success mt-3 text-center">
+                        Your message has been sent successfully!
+                    </p>
+                    {% endif %}
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<footer class="footer-section">
+    <div class="container py-1">
+        <div class="row gy-4">
+
+            <!-- Brand -->
+            <div class="col-12 col-md-6 col-lg-3">
+                <h5 class="footer-brand">{{ footer.brand_name }}</h5>
+                <p class="footer-text">
+                    {{ footer.brand_description|linebreaksbr }}
+                </p>
+            </div>
+
+            <!-- Services -->
+            <div class="col-6 col-md-3 col-lg-3">
+                <h6 class="footer-title">Services</h6>
+                <ul class="footer-links">
+                    <li>{{ footer.service_1 }}</li>
+                    <li>{{ footer.service_2 }}</li>
+                    <li>{{ footer.service_3 }}</li>
+                    <li>{{ footer.service_4 }}</li>
+                </ul>
+            </div>
+
+            <!-- Company -->
+            <div class="col-6 col-md-3 col-lg-3">
+                <h6 class="footer-title">Company</h6>
+                <ul class="footer-links">
+                    <li>{{ footer.company_1 }}</li>
+                    <li>{{ footer.company_2 }}</li>
+                    <li>{{ footer.company_3 }}</li>
+                    <li>{{ footer.company_4 }}</li>
+                </ul>
+            </div>
+
+            <!-- Connect -->
+            <div class="col-6 col-md-3 col-lg-3">
+                <h6 class="footer-title">Connect</h6>
+                <ul class="footer-links">
+                    <li>{{ footer.connect_1 }}</li>
+                    <li>{{ footer.connect_2 }}</li>
+                    <li>{{ footer.connect_3 }}</li>
+                    <li>{{ footer.connect_4 }}</li>
+                </ul>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="footer-bottom-line"></div>
+
+    <div class="footer-bottom">
+        {{ footer.copyright_text }}
+    </div>
+</footer>
+
+
+{% endblock %}
