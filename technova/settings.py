@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'core',
-    'core.apps.CoreConfig',
+    #'core.apps.CoreConfig',
 ]
 
 MIDDLEWARE = [
@@ -122,4 +122,4 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     BASE_DIR / 'core' / 'static'
 ]
-STATIC_ROOT = BASE_DIR / 'staticfiles'
+
